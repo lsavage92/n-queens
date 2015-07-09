@@ -79,11 +79,36 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      //Store row in a local variable
+      var board = this.get(rowIndex);
+      //Create counter
+      var count = 0;
+      //Iterate over row
+      for(var i = 0; i < board.length; i++){
+        //If we encounter a piece
+        if( board[i] === 1 ){
+          //Increment counter
+          count++;
+        }
+      }
+      //If counter > 1, return true
+      if( count > 1 ){
+        return true;
+      }
+      return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      var board = this.rows();
+      //Iterate over board
+      for(var i = 0; i < board.length; i++){
+        //Run hasRowConflictAt on each row
+        if( this.hasRowConflictAt(i) ){
+          //If it returns true, return true
+          return true;
+        }
+      }
       return false; // fixme
     },
 

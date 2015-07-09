@@ -119,11 +119,35 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+      //Create a local variable for board
+      var board = this.rows();
+      //Create a count variable
+      var count = 0;
+      //Iterate over board
+      for(var i = 0; i < board.length; i++){
+        //If we encounter a piece, increment counter
+        if( board[i][colIndex] === 1 ){
+          count++;
+        }
+      }
+      //If counter > 1, return true
+      if ( count > 1 ){
+        return true;
+      }
       return false; // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      var board = this.rows();
+      //Iterate over board
+      for(var i = 0; i < board.length; i++){
+        //Run hasColConflictAt on each row
+        if( this.hasColConflictAt(i) ){
+          //If it returns true, return true
+          return true;
+        }
+      }
       return false; // fixme
     },
 

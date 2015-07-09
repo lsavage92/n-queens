@@ -186,6 +186,21 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+      var count = 0;
+      var board = this.rows();
+
+      for(var i = 0; i < board.length - 1; i++){
+        if( this.hasMajorDiagonalConflictAt(i) ){
+          return true;
+        }
+      }
+
+      for(var i = 1; i < board.length - 1; i++){
+        if( this.hasMajorDiagonalConflictAt(0,i) ){
+          return true;
+        }
+      }
+
       return false; // fixme
     },
 

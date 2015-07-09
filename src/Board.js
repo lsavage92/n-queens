@@ -157,7 +157,30 @@
     // --------------------------------------------------------------
     //
     // test if a specific major diagonal on this board contains a conflict
-    hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+    hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow, row) {
+      var count = 0;
+      var board = this.rows();
+
+      row = row || 0;
+
+      var diagCheck = function(index, row){
+        if( index > board.length - 1 || row > board.length - 1 ){
+          return;
+        }
+
+        if(board[row][index] === 1){
+          count++;
+        }
+
+        diagCheck(index + 1, row + 1);
+      };
+
+      diagCheck(majorDiagonalColumnIndexAtFirstRow, row);
+
+      if(count > 1){
+        return true;
+      }
+
       return false; // fixme
     },
 
@@ -179,7 +202,7 @@
       row = row || 0;
 
       var diagCheck = function(index, row){
-        if( index === -1 || row > board.length - 1 ){//Potential change
+        if( index === -1 || row > board.length - 1 ){
           return;
         }
 
